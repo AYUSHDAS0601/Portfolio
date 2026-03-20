@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayush Das — Developer & Designer</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <div id="c-ring"></div>
+  <div id="c-dot"></div>
+  <canvas id="gl"></canvas>
+  <div class="grain"></div>
+  <div class="vig"></div>
+
+  <div class="page">
+
+    <!-- NAV -->
+    <nav>
+      <div class="nav-mark">Ayush Das</div>
+      <ul class="nav-items">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-status"><span class="status-pip"></span>Open to work</div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-layout">
+        <div class="hero-left">
+          <div class="hero-eyebrow">Software · Web · Game Development</div>
+          <h1 class="hero-name">
+            Building<br>
+            <em>worlds,</em>
+            systems.
+          </h1>
+          <p class="hero-tagline">I write code that moves, breathes, and responds. Currently crafting interactive
+            experiences at the boundary of web and game development.</p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn-prim">Selected Work</a>
+            <a href="AYUSH_DAS_resume.pdf" target="_blank" class="btn-ghost">Resume <i class="ph ph-download-simple" style="margin-left:6px; font-size:14px; transform:translateY(2px)"></i></a>
+          </div>
+        </div>
+        <div class="hero-index">
+          <div class="idx-item"><span class="idx-num">01</span><span class="idx-label">Web Dev</span></div>
+          <div class="idx-item"><span class="idx-num">02</span><span class="idx-label">Game Dev</span></div>
+          <div class="idx-item"><span class="idx-num">03</span><span class="idx-label">Open GL</span></div>
+          <div class="idx-item"><span class="idx-num">04</span><span class="idx-label">Python</span></div>
+          <div class="idx-item"><span class="idx-num">05</span><span class="idx-label">UI/UX</span></div>
+        </div>
+      </div>
+      <div class="scroll-cue">
+        <div class="sc-line"></div><span>scroll</span>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="sec" id="about">
+      <div class="wrap">
+        <div>
+          <div class="sec-no">01 — About</div>
+          <h2 class="sec-h">Craft over<br><em>convention.</em></h2>
+          <div class="divider"></div>
+        </div>
+        <div>
+          <div class="glass-panel">
+            <div class="about-body">
+              <p>I'm a developer who believes interfaces should feel as intentional as they look. My work spans
+                full-stack
+                web applications, real-time user experiences, and game systems — often blurring the line between the
+                three.
+              </p>
+              <p>Currently building with React, OppenGL, and Unreal Engine 5. I approach every project as a design
+                problem first, an engineering problem second.</p>
+              <p style="transition-delay:.15s">Based in India. Available for remote collaboration, freelance, and
+                full-time roles.</p>
+            </div>
+            <div class="stat-row">
+              <div class="stat">
+                <div class="stat-val">3+</div>
+                <div class="stat-lbl">Years building</div>
+              </div>
+              <div class="stat" style="transition-delay:.1s">
+                <div class="stat-val">10</div>
+                <div class="stat-lbl">Projects Made</div>
+              </div>
+              <div class="stat" style="transition-delay:.2s">
+                <div class="stat-val">∞</div>
+                <div class="stat-lbl">Coffee consumed</div>
+              </div>
+            </div>
+            <div class="stat" style="transition-delay:.3s; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(26,47,36,.1);">
+              <div style="font-size:9px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink3); margin-bottom:.75rem;">Full Experience</div>
+              <h3 style="font-family:var(--font-serif); font-size:24px; font-weight:300; color:var(--ink); margin-bottom:1.5rem">Grab a copy of my<br>complete resume.</h3>
+              <a href="AYUSH_DAS_resume.pdf" target="_blank" class="btn-ghost" style="display:inline-flex; width:auto; border-color: rgba(26,47,36,.2);">Download PDF <i class="ph ph-download-simple" style="margin-left:8px; font-size:16px; transform:translateY(1px)"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="sec" id="projects">
+      <div class="wrap">
+        <div class="sec-no">02 — Selected Work</div>
+        <h2 class="sec-h">Things I've<br><em>made.</em></h2>
+        <div class="divider"></div>
+        <div class="proj-cards">
+          <a href="#" class="proj-card">
+            <div class="proj-img-wrap"><img src="project-1.png" alt="NeonVerse" class="proj-img"></div>
+            <div class="proj-card-content">
+              <div class="proj-n">001</div>
+              <div class="proj-info">
+                <h3 class="proj-title">NeonVerse</h3>
+                <div class="proj-meta">Multiplayer 3D browser game — Three.js, WebSocket, custom GLSL shaders</div>
+              </div>
+              <div class="proj-chips"><span class="chip">WebGL</span><span class="chip">GLSL</span></div>
+            </div>
+          </a>
+          <a href="#" class="proj-card">
+            <div class="proj-img-wrap"><img src="project-2.png" alt="MotionUI" class="proj-img"></div>
+            <div class="proj-card-content">
+              <div class="proj-n">002</div>
+              <div class="proj-info">
+                <h3 class="proj-title">MotionUI</h3>
+                <div class="proj-meta">React component library — smooth micro-animations, premium aesthetic</div>
+              </div>
+              <div class="proj-chips"><span class="chip">React</span><span class="chip">GSAP</span></div>
+            </div>
+          </a>
+          <a href="#" class="proj-card">
+            <div class="proj-img-wrap"><img src="project-3.png" alt="DeepField" class="proj-img"></div>
+            <div class="proj-card-content">
+              <div class="proj-n">003</div>
+              <div class="proj-info">
+                <h3 class="proj-title">DeepField</h3>
+                <div class="proj-meta">Exploration game — Unreal Engine 5, Nanite, Lumen GI</div>
+              </div>
+              <div class="proj-chips"><span class="chip">Unreal 5</span><span class="chip">C++</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="sec" id="skills">
+      <div class="wrap">
+        <div>
+          <div class="sec-no">03 — Capabilities</div>
+          <h2 class="sec-h">Tools &amp;<br><em>fluency.</em></h2>
+          <div class="divider"></div>
+          <div class="glass-panel skill-col" id="skills-a"></div>
+        </div>
+        <div>
+          <div class="sec-no" style="margin-bottom:1.5rem;margin-top:3.5rem;opacity:0" id="sk-spacer"></div>
+          <div class="glass-panel skill-col" id="skills-b"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="sec" id="contact">
+      <div class="wrap">
+        <div class="sec-no">04 — Contact</div>
+        <h2 class="sec-h">Let's build<br><em>something.</em></h2>
+        <div class="divider"></div>
+        <div class="contact-grid">
+          <div class="glass-panel contact-panel">
+            <form class="contact-form" id="cf" action="https://formsubmit.co/dasayush.0601@gmail.com" method="POST">
+              <!-- Disable captcha for seamless UX -->
+              <input type="hidden" name="_captcha" value="false">
+              <div class="form-field">
+                <label class="form-label">Your name</label>
+                <input class="form-input" type="text" name="name" placeholder="—" id="fn" required>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Email</label>
+                <input class="form-input" type="email" name="email" placeholder="—" id="fe" required>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Subject</label>
+                <input class="form-input" type="text" name="subject" placeholder="—" id="fs">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Message</label>
+                <textarea class="form-input" name="message" placeholder="—" rows="4" id="fm" required></textarea>
+              </div>
+              <div><button class="btn-prim" type="submit" style="cursor:none">Send Message →</button></div>
+              <div id="form-resp" style="font-size:10px;color:#4ade80;display:none;letter-spacing:.1em;text-transform:uppercase;margin-top:0.75rem;"></div>
+            </form>
+          </div>
+          <div class="glass-panel contact-panel">
+            <div class="contact-aside" id="ca">
+              <div class="social-logos">
+                <a href="mailto:dasayush.0601@gmail.com" class="social-logo" aria-label="Email"><i
+                    class="ph ph-envelope-simple"></i></a>
+                <a href="https://github.com/AYUSHDAS0601" target="_blank" class="social-logo" aria-label="GitHub"><i
+                    class="ph ph-github-logo"></i></a>
+                <a href="https://www.linkedin.com/in/ayush-das060105/" target="_blank" class="social-logo"
+                  aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="https://reddit.com/user/Tiny_You9045" target="_blank" class="social-logo"
+                  aria-label="Reddit"><i class="ph ph-reddit-logo"></i></a>
+              </div>
+              <div style="margin-top:2.5rem;padding-top:2rem;border-top:var(--br)">
+                <div
+                  style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem">
+                  Current status</div>
+                <div style="font-family:var(--font-serif);font-size:18px;font-weight:300;color:var(--a)">Available for
+                  new
+                  projects</div>
+                <div style="font-size:10px;color:var(--ink3);margin-top:.35rem">Response within 24 hours</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot-l">Ayush</div>
+      <div class="foot-r">© 2025 — All rights reserved</div>
+    </footer>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>
