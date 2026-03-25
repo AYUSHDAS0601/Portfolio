@@ -1,16 +1,10 @@
-/* ═══════════════════════════════
-   LENIS SMOOTH SCROLL
-═══════════════════════════════ */
+// script.js
+// Lenis Smooth Scroll
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   direction: 'vertical',
-  gestureDirection: 'vertical',
   smooth: true,
-  mouseMultiplier: 1,
-  smoothTouch: false,
-  touchMultiplier: 2,
-  infinite: false,
 });
 
 function raf(time) {
@@ -20,321 +14,195 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 // Sync GSAP with Lenis
+gsap.registerPlugin(ScrollTrigger);
 lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
+gsap.ticker.add((time) => { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
 
-/* ═══════════════════════════════
-   CURSOR & MAGNETIC UI
-═══════════════════════════════ */
-const cr = document.getElementById('c-ring'), cd = document.getElementById('c-dot');
-let ox = 0, oy = 0, mx = innerWidth / 2, my = innerHeight / 2;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cd.style.left = mx + 'px'; cd.style.top = my + 'px' });
-(function lp() { ox += (mx - ox) * .1; oy += (my - oy) * .1; cr.style.left = ox + 'px'; cr.style.top = oy + 'px'; requestAnimationFrame(lp) })();
-const magElements = document.querySelectorAll('a,button,.proj-row,.btn-prim,.btn-ghost');
-magElements.forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
-  el.addEventListener('mouseleave', () => {
-    document.body.classList.remove('hov');
-    gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
-  });
-  // Magnetic effect for buttons
-  if (el.classList.contains('btn-prim') || el.classList.contains('btn-ghost')) {
-    el.addEventListener('mousemove', (e) => {
-      const rect = el.getBoundingClientRect();
-      const hx = e.clientX - rect.left - rect.width / 2;
-      const hy = e.clientY - rect.top - rect.height / 2;
-      gsap.to(el, { x: hx * 0.3, y: hy * 0.3, duration: 0.3, ease: "power2.out" });
-    });
-  }
+// Loader & WebGL Init
+window.addEventListener('load', () => {
+  initWebGL();
+  const tl = gsap.timeline();
+  tl.to('.loader-text', { opacity: 0, duration: 0.5, delay: 0.5 })
+    .to('.loader', { height: 0, duration: 1, ease: 'power4.inOut' })
+    .to('#gl', { opacity: 1, duration: 2 }, '-=0.5')
+    .to('.fade-in', { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out' }, '-=1')
+    .fromTo('.anim-word', { y: '110%' }, { y: '0%', duration: 1.2, stagger: 0.1, ease: 'power4.out' }, '-=1.2')
+    .to('.hero-img-wrapper', { scale: 1, rotateY: 0, duration: 1.5, ease: 'expo.out' }, '-=1.2')
+    .to('.scroll-down-tracker', { opacity: 1, duration: 1 }, '-=0.5');
 });
-document.addEventListener('mousedown', () => document.body.classList.add('clk'));
-document.addEventListener('mouseup', () => document.body.classList.remove('clk'));
 
-/* ═══════════════════════════════
-   WEBGL — THREE.JS
-═══════════════════════════════ */
-(function () {
+// Three.js Abstract Flowing Object
+function initWebGL() {
   const canvas = document.getElementById('gl');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  if (!canvas) return;
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(innerWidth, innerHeight);
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.setClearColor(0xECF4E8, 1);
 
   const scene = new THREE.Scene();
-  const cam = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, .1, 200);
-  cam.position.set(0, 0, 18);
+  scene.fog = new THREE.Fog(0xECF4E8, 5, 20);
 
-  /* ── FOG ── */
-  scene.fog = new THREE.FogExp2(0xECF4E8, .035);
+  const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 100);
+  camera.position.set(0, 0, 12);
 
-  /* ── LIGHTS ── */
   scene.add(new THREE.AmbientLight(0xffffff, 2.5));
   const l1 = new THREE.DirectionalLight(0xffffff, 1.5); l1.position.set(5, 10, 5); scene.add(l1);
   const l2 = new THREE.PointLight(0xCBF3BB, 3, 30); l2.position.set(-8, 5, 2); scene.add(l2);
-  const l3 = new THREE.PointLight(0x93BFC7, 2, 30); l3.position.set(5, -5, -5); scene.add(l3);
 
-  /* ── ABSTRACT SHAPES ── */
-  const shapesGroup = new THREE.Group();
-  scene.add(shapesGroup);
+  const group = new THREE.Group();
+  scene.add(group);
 
-  const matOpts = {
-    roughness: 0.15,
+  const geo = new THREE.TorusKnotGeometry(3, 0.8, 200, 32);
+  const mat = new THREE.MeshPhysicalMaterial({
+    color: 0x93BFC7,
+    roughness: 0.1,
     metalness: 0.1,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.1,
-    transmission: 0.6,
-    thickness: 1.5
-  };
+    transmission: 0.9,
+    thickness: 1.5,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.15
+  });
+  
+  const mesh = new THREE.Mesh(geo, mat);
+  group.add(mesh);
+  
+  const geo2 = new THREE.IcosahedronGeometry(2, 4);
+  const mat2 = new THREE.MeshPhysicalMaterial({ color: 0x1A2F24, wireframe: true, transparent: true, opacity: 0.08 });
+  const mesh2 = new THREE.Mesh(geo2, mat2);
+  group.add(mesh2);
 
-  const colors = [0xCBF3BB, 0xABE7B2, 0x93BFC7, 0xffffff];
-  const geos = [
-    new THREE.SphereGeometry(1, 64, 64),
-    new THREE.TorusGeometry(1, 0.4, 64, 100),
-    new THREE.IcosahedronGeometry(1, 4)
-  ];
-
-  const objects = [];
-  for (let i = 0; i < 18; i++) {
-    const geo = geos[Math.floor(Math.random() * geos.length)];
-    const mat = new THREE.MeshPhysicalMaterial({
-      ...matOpts,
-      color: colors[i % colors.length]
-    });
-    const mesh = new THREE.Mesh(geo, mat);
-
-    mesh.position.set(
-      (Math.random() - 0.5) * 25,
-      (Math.random() - 0.5) * 18,
-      (Math.random() - 0.5) * 15 - 4
-    );
-
-    mesh.scale.setScalar(0.6 + Math.random() * 1.8);
-
-    mesh.userData = {
-      baseY: mesh.position.y,
-      speed: 0.2 + Math.random() * 0.3,
-      phase: Math.random() * Math.PI * 2,
-      rx: (Math.random() - 0.5) * 0.01,
-      ry: (Math.random() - 0.5) * 0.01,
-      rz: (Math.random() - 0.5) * 0.01
-    };
-
-    shapesGroup.add(mesh);
-    objects.push(mesh);
-  }
-
-  /* ── SCROLL & MOUSE ── */
-  let scrollY = 0, mouseX = 0, mouseY = 0;
-  window.addEventListener('scroll', () => scrollY = window.scrollY);
-  window.addEventListener('mousemove', e => { mouseX = (e.clientX / innerWidth - .5) * 2; mouseY = -(e.clientY / innerHeight - .5) * 2 });
-
-  /* ── ANIMATE ── */
-  let t = 0;
-  let cx = 0, cy = 0;
-  function tick() {
-    requestAnimationFrame(tick);
-    t += .005;
-    const sf = scrollY / (document.body.scrollHeight - innerHeight) || 0;
-
-    cx += (mouseX * .8 - cx) * 0.05;
-    cy += (mouseY * .8 - sf * 3 - cy) * 0.05;
-
-    cam.position.x = cx;
-    cam.position.y = cy;
-    cam.position.z = 18 - sf * 1.5;
-    cam.lookAt(0, -sf, 0);
-
-    objects.forEach((obj) => {
-      const u = obj.userData;
-      obj.position.y = u.baseY + Math.sin(t * u.speed + u.phase) * 1.8;
-      obj.rotation.x += u.rx;
-      obj.rotation.y += u.ry;
-      obj.rotation.z += u.rz;
-    });
-
-    shapesGroup.rotation.y = t * 0.08;
-    renderer.render(scene, cam);
-  }
-  tick();
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', e => {
+    mouseX = (e.clientX / innerWidth - 0.5) * 2;
+    mouseY = -(e.clientY / innerHeight - 0.5) * 2;
+  });
 
   window.addEventListener('resize', () => {
     renderer.setSize(innerWidth, innerHeight);
-    cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix();
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
   });
-})();
 
-/* ═══════════════════════════════
-   SKILLS DATA
-═══════════════════════════════ */
-const skillsA = [
-  { n: 'React / Next.js', t: 'Amature', tier: 'ex', w: .60 },
-  { n: 'OpenGL', t: 'Amature', tier: 'ex', w: .55 },
-  { n: 'Node.js', t: 'Advanced', tier: 'ad', w: .78 },
-];
-const skillsB = [
-  { n: 'Unreal Engine 5', t: 'Advanced', tier: 'ad', w: .8 },
-  { n: 'C++ / Blueprints', t: 'Advanced', tier: 'ad', w: .74 },
-  { n: 'Blender', t: 'Intermediate', tier: 'md', w: .65 },
-  { n: 'GLSL Shaders', t: 'Intermediate', tier: 'md', w: .6 },
-  { n: 'Python', t: 'Intermediate', tier: 'md', w: .58 },
-];
-function buildSkills(data, el) {
-  data.forEach((s, i) => {
-    const d = document.createElement('div');
-    d.className = 'skill-item';
-    d.style.transitionDelay = `${i * .08}s`;
-    d.innerHTML = `<span class="skill-name">${s.n}</span><div style="display:flex;align-items:center;gap:1rem"><span class="skill-tier ${s.tier}">${s.t}</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:${s.w * 100}%"></div></div></div>`;
-    document.getElementById(el).appendChild(d);
-  });
-}
-buildSkills(skillsA, 'skills-a');
-buildSkills(skillsB, 'skills-b');
+  function animate() {
+    requestAnimationFrame(animate);
+    mesh.rotation.y += 0.001;
+    mesh.rotation.x += 0.002;
+    mesh2.rotation.y -= 0.002;
+    mesh2.rotation.z -= 0.001;
+    
+    group.rotation.x += (mouseY * 0.1 - group.rotation.x) * 0.05;
+    group.rotation.y += (mouseX * 0.1 - group.rotation.y) * 0.05;
 
-/* ═══════════════════════════════
-   GSAP SCROLL TRIGGERS
-═══════════════════════════════ */
-gsap.registerPlugin(ScrollTrigger);
+    camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+    camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
 
-// Split Text implementation for Hero
-const heroTitle = document.querySelector('.hero-name');
-if (heroTitle) {
-  const chars = heroTitle.textContent.trim().split('');
-  heroTitle.innerHTML = '';
-  chars.forEach(c => {
-    if (c === ' ') {
-      heroTitle.appendChild(document.createTextNode(' '));
-    } else {
-      const span = document.createElement('span');
-      span.className = 'char';
-      span.textContent = c;
-      if (c === ',') {
-        const em = document.createElement('em');
-        em.style.display = 'inline-block';
-        em.appendChild(span);
-        heroTitle.appendChild(em);
-      } else {
-        heroTitle.appendChild(span);
-      }
-    }
-  });
-  // Since we replaced the HTML entirely, let's fix the structure: "Building <br> <em>worlds,</em> systems."
-  heroTitle.innerHTML = `
-    <span style="display:inline-block; overflow:hidden;"><span class="char" style="display:inline-block">B</span><span class="char" style="display:inline-block">u</span><span class="char" style="display:inline-block">i</span><span class="char" style="display:inline-block">l</span><span class="char" style="display:inline-block">d</span><span class="char" style="display:inline-block">i</span><span class="char" style="display:inline-block">n</span><span class="char" style="display:inline-block">g</span></span><br>
-    <em><span style="display:inline-block; overflow:hidden;"><span class="char" style="display:inline-block">w</span><span class="char" style="display:inline-block">o</span><span class="char" style="display:inline-block">r</span><span class="char" style="display:inline-block">l</span><span class="char" style="display:inline-block">d</span><span class="char" style="display:inline-block">s</span><span class="char" style="display:inline-block">,</span></span></em>
-    <span style="display:inline-block; overflow:hidden;"><span class="char" style="display:inline-block">s</span><span class="char" style="display:inline-block">y</span><span class="char" style="display:inline-block">s</span><span class="char" style="display:inline-block">t</span><span class="char" style="display:inline-block">e</span><span class="char" style="display:inline-block">m</span><span class="char" style="display:inline-block">s</span><span class="char" style="display:inline-block">.</span></span>
-  `;
+    renderer.render(scene, camera);
+  }
+  animate();
 }
 
-// Section titles
-document.querySelectorAll('.sec-h').forEach(el => {
-  ScrollTrigger.create({ trigger: el, start: 'top 85%', onEnter: () => el.classList.add('vis') });
+// Custom Cursor
+const cr = document.getElementById('c-ring'), cd = document.getElementById('c-dot');
+let mx = innerWidth / 2, my = innerHeight / 2, ox = mx, oy = my;
+window.addEventListener('mousemove', e => { 
+  mx = e.clientX; my = e.clientY; 
+  cd.style.transform = `translate(${mx}px, ${my}px)`; 
+});
+gsap.ticker.add(() => {
+  ox += (mx - ox) * 0.15; oy += (my - oy) * 0.15;
+  cr.style.transform = `translate(${ox}px, ${oy}px)`; 
 });
 
-// Animate Hero text dynamically
-gsap.to('.char', {
-  opacity: 1,
-  y: 0,
-  rotation: 0,
-  stagger: 0.05,
-  duration: 1.4,
-  ease: "power2.out",
-  delay: 0.3
+document.querySelectorAll('a, button, .card-inner, .s-link, .marquee-content img, .download-link').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
 });
 
-// About paragraphs
-document.querySelectorAll('.about-body p').forEach((el, i) => {
-  ScrollTrigger.create({ trigger: el, start: 'top 88%', onEnter: () => el.classList.add('vis') });
-});
-
-// Stats
-document.querySelectorAll('.stat').forEach(el => {
-  ScrollTrigger.create({ trigger: el, start: 'top 88%', onEnter: () => el.classList.add('vis') });
-});
-
-// Project cards reveal
-document.querySelectorAll('.proj-card').forEach(el => {
-  ScrollTrigger.create({ trigger: el, start: 'top 90%', onEnter: () => el.classList.add('vis') });
-});
-
-// Image parallax scrub
-document.querySelectorAll('.proj-img').forEach(img => {
-  gsap.to(img, {
-    y: "15%",
-    ease: "none",
-    scrollTrigger: {
-      trigger: img.closest('.proj-card'),
-      start: "top bottom",
-      end: "bottom top",
-      scrub: true
-    }
+// Split Text manually for About Section
+const aboutText = document.querySelector('.about-text');
+if (aboutText) {
+  const words = aboutText.innerText.split(' ');
+  aboutText.innerHTML = '';
+  words.forEach(word => {
+    const span = document.createElement('span');
+    span.className = 'word';
+    span.innerText = word + ' ';
+    aboutText.appendChild(span);
   });
-});
+}
 
-// Skills
+// Reveal About
 ScrollTrigger.create({
-  trigger: '#skills', start: 'top 70%',
-  onEnter: () => document.querySelectorAll('.skill-item').forEach(e => e.classList.add('vis'))
-});
-
-// Contact
-ScrollTrigger.create({
-  trigger: '#contact', start: 'top 75%',
+  trigger: '#about',
+  start: 'top 65%',
   onEnter: () => {
-    document.getElementById('cf').classList.add('vis');
-    document.getElementById('ca').classList.add('vis');
+    gsap.to('.word', { opacity: 1, duration: 0.05, stagger: 0.03, ease: 'none' });
+    gsap.to('.fade-up', { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out', delay: 0.4 });
   }
 });
 
-// Subtle parallax on hero name
-gsap.to('.hero-name', {
-  y: -50, // enhanced slightly for lenis
-  scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 }
-});
-gsap.to('.hero-tagline, .hero-eyebrow', {
-  y: -15, opacity: 0,
-  scrollTrigger: { trigger: '#hero', start: '30% top', end: 'bottom top', scrub: 1 }
+// Sticky Cards Parallax & Scaling
+const cards = document.querySelectorAll('.card-sticky');
+cards.forEach((card, index) => {
+  const img = card.querySelector('.card-img');
+  if(img) {
+    gsap.to(img, {
+      y: "15%",
+      ease: 'none',
+      scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+  }
+  
+  if (index < cards.length - 1 && window.innerWidth > 900) {
+    gsap.to(card.querySelector('.card-inner'), {
+      scale: 0.94,
+      opacity: 0.4,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: cards[index + 1],
+        start: 'top 85%',
+        end: 'top 15%',
+        scrub: true
+      }
+    });
+  }
 });
 
-/* ═══════════════════════════════
-   FORM
-═══════════════════════════════ */
+// Reveal Contact Form
+ScrollTrigger.create({
+  trigger: '#contact',
+  start: 'top 75%',
+  onEnter: () => {
+    gsap.to('.c-form', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' });
+  }
+});
+
+// Contact Form Submit Handling
 const contactForm = document.getElementById('cf');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const n = document.getElementById('fn').value;
-    const email = document.getElementById('fe').value;
-    const subj = document.getElementById('fs').value;
-    const m = document.getElementById('fm').value;
     const r = document.getElementById('form-resp');
-    
-    if (!n || !m || !email) { 
-      if(r) { r.style.display = 'block'; r.style.color = '#f87171'; r.textContent = 'Please fill out required fields.'; }
-      return; 
-    }
+    const n = document.querySelector('input[name="name"]').value;
     
     if(r) { r.style.display = 'block'; r.style.color = 'var(--ink2)'; r.textContent = 'Sending...'; }
     
     fetch("https://formsubmit.co/ajax/dasayush.0601@gmail.com", {
       method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
         name: n,
-        email: email,
-        subject: subj || "New Portfolio Message",
-        message: m,
+        email: document.querySelector('input[name="email"]').value,
+        message: document.querySelector('textarea[name="message"]').value,
         _captcha: false
       })
     })
     .then(response => response.json())
     .then(data => {
-      if(r) { r.style.color = '#4ade80'; r.textContent = `Message sent — I'll be in touch, ${n}.`; }
+      if(r) { r.style.color = '#4ade80'; r.style.marginTop = '1rem'; r.textContent = `Message sent — I'll be in touch, ${n}.`; }
       contactForm.reset();
     })
     .catch(error => {
@@ -343,23 +211,3 @@ if (contactForm) {
     });
   });
 }
-
-/* ═══════════════════════════════
-   KONAMI
-═══════════════════════════════ */
-const K = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; let ki = 0;
-document.addEventListener('keydown', e => {
-  ki = e.keyCode === K[ki] ? ki + 1 : 0;
-  if (ki === K.length) {
-    ki = 0;
-    const o = document.createElement('div');
-    o.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(5,4,10,.96);display:flex;align-items:center;justify-content:center;cursor:none';
-    o.innerHTML = `<div style="border:1px solid rgba(232,201,122,.2);padding:4rem;text-align:center;max-width:360px;font-family:DM Mono,monospace">
-      <div style="font-size:9px;letter-spacing:.2em;color:rgba(232,201,122,.5);margin-bottom:2rem;text-transform:uppercase">— Hidden —</div>
-      <div style="font-family:Cormorant Garamond,serif;font-size:48px;font-weight:300;font-style:italic;color:#e8c97a;margin-bottom:1.5rem">NightCrawler</div>
-      <div style="font-size:11px;color:#7a7898;line-height:1.8;margin-bottom:2rem">A stealth rogue-like currently in development.<br>Wishlist for early access.</div>
-      <div style="font-size:9px;letter-spacing:.15em;color:rgba(232,201,122,.4);text-transform:uppercase;cursor:none" onclick="this.closest('div').remove()">[ close ]</div>
-    </div>`;
-    document.body.appendChild(o); o.addEventListener('click', () => o.remove());
-  }
-});

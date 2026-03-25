@@ -4,232 +4,224 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ayush Das — Developer & Designer</title>
+  <title>Ayush Das — Premium Portfolio</title>
   <link rel="icon" type="image/jpeg" href="favicon.jpg">
   <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- LOADER -->
+  <div class="loader">
+    <div class="loader-text">Loading Experience...</div>
+  </div>
+
+  <canvas id="gl"></canvas>
   <div id="c-ring"></div>
   <div id="c-dot"></div>
-  <canvas id="gl"></canvas>
   <div class="grain"></div>
-  <div class="vig"></div>
 
   <div class="page">
 
     <!-- NAV -->
-    <nav>
-      <div class="nav-mark">Ayush Das</div>
+    <nav class="nav-main">
+      <div class="nav-mark">A.D</div>
       <ul class="nav-items">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Work</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about" data-lenis-scroll>About</a></li>
+        <li><a href="#projects" data-lenis-scroll>Projects</a></li>
+        <li><a href="#skills" data-lenis-scroll>Tech</a></li>
+        <li><a href="#contact" data-lenis-scroll>Initialise()</a></li>
       </ul>
-      <div class="nav-status"><span class="status-pip"></span>Open to work</div>
+      <div class="nav-status"><span class="status-pip"></span>Available</div>
     </nav>
 
     <!-- HERO -->
-    <section id="hero">
-      <div class="hero-layout">
-        <div class="hero-left">
-          <div class="hero-eyebrow">Software · Web · Game Development</div>
-          <h1 class="hero-name">
-            Building<br>
-            <em>worlds,</em>
-            systems.
+    <section id="hero" class="sec-pad">
+      <div class="hero-split">
+        <div class="hero-text-col">
+          <div class="hero-top-text fade-in">Creative Developer &amp; Designer</div>
+          <h1 class="hero-huge-title">
+            <div class="h-line"><span class="anim-word">Building</span></div>
+            <div class="h-line"><span class="anim-word">Digital</span></div>
+            <div class="h-line"><span class="anim-word">Futures.</span></div>
           </h1>
-          <p class="hero-tagline">I write code that moves, breathes, and responds. Currently crafting interactive
-            experiences at the boundary of web and game development.</p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn-prim">Selected Work</a>
-            <a href="AYUSH_DAS_resume.pdf" target="_blank" class="btn-ghost">Resume <i class="ph ph-download-simple" style="margin-left:6px; font-size:14px; transform:translateY(2px)"></i></a>
+          <p class="hero-subtext fade-in">Merging high-performance engineering with bleeding-edge aesthetic design. I create systems that scale and experiences that stick.</p>
+        </div>
+        <div class="hero-img-col">
+          <div class="hero-img-wrapper">
+            <img src="favicon.jpg" alt="Profile" class="hero-profile-pic">
+            <div class="img-ring"></div>
           </div>
         </div>
-        <div class="hero-index">
-          <div class="idx-item"><span class="idx-num">01</span><span class="idx-label">Web Dev</span></div>
-          <div class="idx-item"><span class="idx-num">02</span><span class="idx-label">Game Dev</span></div>
-          <div class="idx-item"><span class="idx-num">03</span><span class="idx-label">Open GL</span></div>
-          <div class="idx-item"><span class="idx-num">04</span><span class="idx-label">Python</span></div>
-          <div class="idx-item"><span class="idx-num">05</span><span class="idx-label">UI/UX</span></div>
-        </div>
       </div>
-      <div class="scroll-cue">
-        <div class="sc-line"></div><span>scroll</span>
+      <div class="scroll-down-tracker">
+        <div class="sc-line"></div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="sec" id="about">
-      <div class="wrap">
-        <div>
-          <div class="sec-no">01 — About</div>
-          <h2 class="sec-h">Craft over<br><em>convention.</em></h2>
-          <div class="divider"></div>
-        </div>
-        <div>
-          <div class="glass-panel">
-            <div class="about-body">
-              <p>I'm a developer who believes interfaces should feel as intentional as they look. My work spans
-                full-stack
-                web applications, real-time user experiences, and game systems — often blurring the line between the
-                three.
-              </p>
-              <p>Currently building with React, OppenGL, and Unreal Engine 5. I approach every project as a design
-                problem first, an engineering problem second.</p>
-              <p style="transition-delay:.15s">Based in India. Available for remote collaboration, freelance, and
-                full-time roles.</p>
-            </div>
-            <div class="stat-row">
-              <div class="stat">
-                <div class="stat-val">3+</div>
-                <div class="stat-lbl">Years building</div>
-              </div>
-              <div class="stat" style="transition-delay:.1s">
-                <div class="stat-val">10</div>
-                <div class="stat-lbl">Projects Made</div>
-              </div>
-              <div class="stat" style="transition-delay:.2s">
-                <div class="stat-val">∞</div>
-                <div class="stat-lbl">Coffee consumed</div>
-              </div>
-            </div>
-            <div class="stat" style="transition-delay:.3s; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(26,47,36,.1);">
-              <div style="font-size:9px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink3); margin-bottom:.75rem;">Full Experience</div>
-              <h3 style="font-family:var(--font-serif); font-size:24px; font-weight:300; color:var(--ink); margin-bottom:1.5rem">Grab a copy of my<br>complete resume.</h3>
-              <a href="AYUSH_DAS_resume.pdf" target="_blank" class="btn-ghost" style="display:inline-flex; width:auto; border-color: rgba(26,47,36,.2);">Download PDF <i class="ph ph-download-simple" style="margin-left:8px; font-size:16px; transform:translateY(1px)"></i></a>
-            </div>
+    <!-- ABOUT / TEXT REVEAL -->
+    <section id="about" class="sec-pad">
+      <div class="container">
+        <p class="about-text split-text">
+          I am a software developer with a deep passion for crafting immersive digital experiences. My interests span across high-performance game development, modern web architectures, and elegant UI/UX design. I believe in writing code that not only functions flawlessly but feels inherently intentional.
+        </p>
+        <div class="about-stats">
+          <div class="stat-col fade-up">
+            <div class="stat-n">3+</div>
+            <div class="stat-l">Years active</div>
+          </div>
+          <div class="stat-col fade-up" style="transition-delay: 0.1s;">
+            <div class="stat-n">10+</div>
+            <div class="stat-l">Projects Shipped</div>
+          </div>
+          <div class="stat-col fade-up" style="transition-delay: 0.2s;">
+            <div class="stat-n"><a href="AYUSH_DAS_resume.pdf" target="_blank" class="download-link">Resume <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a></div>
+            <div class="stat-l">Full Profile</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section class="sec" id="projects">
-      <div class="wrap">
-        <div class="sec-no">02 — Selected Work</div>
-        <h2 class="sec-h">Things I've<br><em>made.</em></h2>
-        <div class="divider"></div>
-        <div class="proj-cards">
-          <a href="#" class="proj-card">
-            <div class="proj-img-wrap"><img src="project-1.png" alt="NeonVerse" class="proj-img"></div>
-            <div class="proj-card-content">
-              <div class="proj-n">001</div>
-              <div class="proj-info">
-                <h3 class="proj-title">NeonVerse</h3>
-                <div class="proj-meta">Multiplayer 3D browser game — Three.js, WebSocket, custom GLSL shaders</div>
-              </div>
-              <div class="proj-chips"><span class="chip">WebGL</span><span class="chip">GLSL</span></div>
+    <!-- PROJECTS (STICKY CARDS) -->
+    <section id="projects">
+      <div class="proj-header sec-pad">
+        <div class="sec-lbl">Selected Work</div>
+      </div>
+      <div class="cards-container">
+        
+        <!-- Card 1 -->
+        <div class="card-sticky" id="c1">
+          <div class="card-inner">
+            <div class="card-img-container">
+              <img src="project-1.png" alt="NeonVerse" class="card-img">
             </div>
-          </a>
-          <a href="#" class="proj-card">
-            <div class="proj-img-wrap"><img src="project-2.png" alt="MotionUI" class="proj-img"></div>
-            <div class="proj-card-content">
-              <div class="proj-n">002</div>
-              <div class="proj-info">
-                <h3 class="proj-title">MotionUI</h3>
-                <div class="proj-meta">React component library — smooth micro-animations, premium aesthetic</div>
-              </div>
-              <div class="proj-chips"><span class="chip">React</span><span class="chip">GSAP</span></div>
+            <div class="card-info">
+              <div class="card-meta">01 — WebGL / Three.js</div>
+              <h3 class="card-title">NeonVerse</h3>
+              <p class="card-desc">Multiplayer 3D browser environment emphasizing custom GLSL shaders and raw WebSocket performance.</p>
             </div>
-          </a>
-          <a href="#" class="proj-card">
-            <div class="proj-img-wrap"><img src="project-3.png" alt="DeepField" class="proj-img"></div>
-            <div class="proj-card-content">
-              <div class="proj-n">003</div>
-              <div class="proj-info">
-                <h3 class="proj-title">DeepField</h3>
-                <div class="proj-meta">Exploration game — Unreal Engine 5, Nanite, Lumen GI</div>
-              </div>
-              <div class="proj-chips"><span class="chip">Unreal 5</span><span class="chip">C++</span></div>
-            </div>
-          </a>
+          </div>
         </div>
+
+        <!-- Card 2 -->
+        <div class="card-sticky" id="c2">
+          <div class="card-inner">
+            <div class="card-img-container">
+              <img src="project-2.png" alt="MotionUI" class="card-img">
+            </div>
+            <div class="card-info">
+              <div class="card-meta">02 — React / GSAP</div>
+              <h3 class="card-title">MotionUI</h3>
+              <p class="card-desc">A premium component library heavily focused on smooth micro-interactions and high-end aesthetic value.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card-sticky" id="c3">
+          <div class="card-inner">
+            <div class="card-img-container">
+              <img src="project-3.png" alt="DeepField" class="card-img">
+            </div>
+            <div class="card-info">
+              <div class="card-meta">03 — Unreal Engine 5</div>
+              <h3 class="card-title">DeepField</h3>
+              <p class="card-desc">An exploratory game experience pushing visual fidelity through Nanite and Lumen global illumination.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section class="sec" id="skills">
-      <div class="wrap">
-        <div>
-          <div class="sec-no">03 — Capabilities</div>
-          <h2 class="sec-h">Tools &amp;<br><em>fluency.</em></h2>
-          <div class="divider"></div>
-          <div class="glass-panel skill-col" id="skills-a"></div>
+    <!-- SKILLS MARQUEE -->
+    <section id="skills">
+      <div class="marquee-wrapper">
+        <div class="marquee">
+          <div class="marquee-content">
+            <!-- Iconic Tech Stack -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unrealengine/unrealengine-original.svg" alt="Unreal Engine 5">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/archlinux/archlinux-original.svg" alt="Arch Linux">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" alt="Vercel">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opengl/opengl-original.svg" alt="OpenGL">
+            
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unrealengine/unrealengine-original.svg" alt="Unreal Engine 5">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/archlinux/archlinux-original.svg" alt="Arch Linux">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" alt="Vercel">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opengl/opengl-original.svg" alt="OpenGL">
+          </div>
         </div>
-        <div>
-          <div class="sec-no" style="margin-bottom:1.5rem;margin-top:3.5rem;opacity:0" id="sk-spacer"></div>
-          <div class="glass-panel skill-col" id="skills-b"></div>
+      </div>
+      <div class="marquee-divider"></div>
+      <div class="marquee-wrapper reverse">
+        <div class="marquee">
+          <div class="marquee-content">
+            <span class="txt">FRONTEND</span><span class="bull">&bull;</span>
+            <span class="txt">BACKEND</span><span class="bull">&bull;</span>
+            <span class="txt">GAME LOGIC</span><span class="bull">&bull;</span>
+            <span class="txt">UI / UX</span><span class="bull">&bull;</span>
+            <span class="txt">DATABASES</span><span class="bull">&bull;</span>
+            <span class="txt">SYSTEMS</span><span class="bull">&bull;</span>
+            <span class="txt">FRONTEND</span><span class="bull">&bull;</span>
+            <span class="txt">BACKEND</span><span class="bull">&bull;</span>
+            <span class="txt">GAME LOGIC</span><span class="bull">&bull;</span>
+            <span class="txt">UI / UX</span><span class="bull">&bull;</span>
+            <span class="txt">DATABASES</span><span class="bull">&bull;</span>
+            <span class="txt">SYSTEMS</span><span class="bull">&bull;</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="sec" id="contact">
-      <div class="wrap">
-        <div class="sec-no">04 — Contact</div>
-        <h2 class="sec-h">Let's build<br><em>something.</em></h2>
-        <div class="divider"></div>
-        <div class="contact-grid">
-          <div class="glass-panel contact-panel">
-            <form class="contact-form" id="cf" action="https://formsubmit.co/dasayush.0601@gmail.com" method="POST">
-              <!-- Disable captcha for seamless UX -->
-              <input type="hidden" name="_captcha" value="false">
-              <div class="form-field">
-                <label class="form-label">Your name</label>
-                <input class="form-input" type="text" name="name" placeholder="—" id="fn" required>
-              </div>
-              <div class="form-field">
-                <label class="form-label">Email</label>
-                <input class="form-input" type="email" name="email" placeholder="—" id="fe" required>
-              </div>
-              <div class="form-field">
-                <label class="form-label">Subject</label>
-                <input class="form-input" type="text" name="subject" placeholder="—" id="fs">
-              </div>
-              <div class="form-field">
-                <label class="form-label">Message</label>
-                <textarea class="form-input" name="message" placeholder="—" rows="4" id="fm" required></textarea>
-              </div>
-              <div><button class="btn-prim" type="submit" style="cursor:none">Send Message →</button></div>
-              <div id="form-resp" style="font-size:10px;color:#4ade80;display:none;letter-spacing:.1em;text-transform:uppercase;margin-top:0.75rem;"></div>
-            </form>
+    <section id="contact" class="sec-pad">
+      <div class="container contact-split">
+        <div class="contact-left">
+          <div class="sec-lbl">Collaborate</div>
+          <h2 class="contact-huge"><a href="mailto:dasayush.0601@gmail.com" class="hover-link">Let's Talk.</a></h2>
+          <div class="socials mt-4">
+            <a href="mailto:dasayush.0601@gmail.com" class="s-link" aria-label="Email">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://github.com/AYUSHDAS0601" target="_blank" class="s-link" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/ayush-das060105/" target="_blank" class="s-link" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
           </div>
-          <div class="glass-panel contact-panel">
-            <div class="contact-aside" id="ca">
-              <div class="social-logos">
-                <a href="mailto:dasayush.0601@gmail.com" class="social-logo" aria-label="Email"><i
-                    class="ph ph-envelope-simple"></i></a>
-                <a href="https://github.com/AYUSHDAS0601" target="_blank" class="social-logo" aria-label="GitHub"><i
-                    class="ph ph-github-logo"></i></a>
-                <a href="https://www.linkedin.com/in/ayush-das060105/" target="_blank" class="social-logo"
-                  aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="https://reddit.com/user/Tiny_You9045" target="_blank" class="social-logo"
-                  aria-label="Reddit"><i class="ph ph-reddit-logo"></i></a>
-              </div>
-              <div style="margin-top:2.5rem;padding-top:2rem;border-top:var(--br)">
-                <div
-                  style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem">
-                  Current status</div>
-                <div style="font-family:var(--font-serif);font-size:18px;font-weight:300;color:var(--a)">Available for
-                  new
-                  projects</div>
-                <div style="font-size:10px;color:var(--ink3);margin-top:.35rem">Response within 24 hours</div>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div class="contact-right">
+          <form class="c-form" id="cf" action="https://formsubmit.co/dasayush.0601@gmail.com" method="POST">
+            <input type="hidden" name="_captcha" value="false">
+            <input class="f-in" type="text" name="name" placeholder="Name" required>
+            <input class="f-in" type="email" name="email" placeholder="Email" required>
+            <textarea class="f-in f-txt" name="message" placeholder="Message" rows="3" required></textarea>
+            <button class="btn-submit" type="submit">Send <span class="arr">↗</span></button>
+            <div id="form-resp"></div>
+          </form>
         </div>
       </div>
     </section>
 
-    <footer>
-      <div class="foot-l">Ayush</div>
-      <div class="foot-r">© 2025 — All rights reserved</div>
+    <footer class="ftr">
+      <div class="f-left">© 2025 Ayush Das</div>
+      <div class="f-right">Crafted with precision.</div>
     </footer>
 
   </div>
@@ -238,9 +230,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="script.js"></script>
 
 </body>
-
 </html>
